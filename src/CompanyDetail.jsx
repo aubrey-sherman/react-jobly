@@ -23,14 +23,15 @@ const defaultData = {
   ]
 };
 
-function CompanyDetail({ company=defaultData }) {
+function CompanyDetail({ company = defaultData }) {
+  console.log("* CompanyDetail", "we made it!");
   // get query params => const { param } = useParams();
   // API call
-  return(
+  return (
     <div>
       <h1>{company.name}</h1>
       <h3>{company.description}</h3>
-      <JobCardList jobs={company.jobs}/>
+      <JobCardList jobs={company.jobs} />
     </div>
   );
 }

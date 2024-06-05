@@ -9,6 +9,8 @@ import { NavLink } from "react-router-dom";
  */
 
 function Navigation() {
+  console.log("* Navigation");
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
       <ul className="nav justify-content-center">
@@ -35,7 +37,7 @@ function Navigation() {
         </li>
       </ul>
     </nav>
-  )
+  );
 }
 
 export default Navigation;

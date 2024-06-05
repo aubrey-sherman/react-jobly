@@ -1,4 +1,4 @@
-
+import JobCard from "./JobCard";
 
 /** List of job components
  *
@@ -9,16 +9,18 @@
  * JobList -> JobCardList
  */
 
-function JobCardList({ jobs }){
+function JobCardList({ jobs }) {
+  console.log("* JobCardList", jobs);
+
   return (
     <div>
-      <ul>
+      <ul className="list-group">
         {jobs.map(job => {
-          <li><JobCard job={job}/></li>
+          return (<li key={job.id} className="list-group-item"> <JobCard job={job} /></li>);
         })}
       </ul>
-    </div>
-  )
-}
+    </div >
+  );
+};
 
 export default JobCardList;

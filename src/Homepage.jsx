@@ -7,6 +7,7 @@
  */
 
 function Homepage() {
+  console.log("* Homepage");
   return (
     <h1>Jobly!</h1>
   );
