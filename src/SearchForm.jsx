@@ -9,8 +9,8 @@ import { useState } from "react";
  */
 
 function SearchForm({ onSubmit }) {
-  const [formData, setFormData] = useState(null);
-  console.log("* SearchForm");
+  const [formData, setFormData] = useState({searchParam: ""});
+  console.log("* SearchForm", formData);
 
   function handleChange(evt) {
     const fieldName = evt.target.name;
