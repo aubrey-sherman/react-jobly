@@ -1,37 +1,52 @@
 import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 import JoblyApi from "./api.js";
 import JobCardList from "./JobCardList.jsx";
 
 /** Company detail page
  *
- * Props: company object
- * State: None
+ * Props: None
+ * State: {isLoading, data}
  *
  * RoutesList -> CompanyDetail -> JobCardList
  */
 
-const defaultData = {
-  name: "Jacob and Aubrey LLC",
-  description: "white hat hacking since 2024",
-  jobs: [
-    {
-      "id": 91,
-      "title": "Hacker",
-      "salary": 122000,
-      "equity": "0.047"
-    },
-  ]
-};
+// const defaultData = {
+//   name: "Jacob and Aubrey LLC",
+//   description: "white hat hacking since 2024",
+//   jobs: [
+//     {
+//       "id": 91,
+//       "title": "Hacker",
+//       "salary": 122000,
+//       "equity": "0.047"
+//     },
+//   ]
+// };
 
-function CompanyDetail({ company = defaultData }) {
-  console.log("* CompanyDetail", "we made it!");
-  // get query params => const { param } = useParams();
-  // API call
+function CompanyDetail() {
+  const [company, setCompany] = useState({data: null, isLoading: true});
+  const { handle } = useParams();
+  console.log("* CompanyDetail", company, handle);
+
+  useEffect(function fetchCompanyOnRender() {
+    async function fetchCompany() {
+      const companyResponse = await JoblyApi.request(`companies/${handle}`);
+      setCompany({
+        data: companyResponse.company,
+        isLoading: false
+      });
+    }
+    fetchCompany();
+  }, []);
+
+  if(company.isLoading) return <p>Loading...</p>;
+
   return (
     <div>
-      <h1>{company.name}</h1>
-      <h3>{company.description}</h3>
-      <JobCardList jobs={company.jobs} />
+      <h1>{company.data.name}</h1>
+      <h4>{company.data.description}</h4>
+      <JobCardList jobs={company.data.jobs} />
     </div>
   );
 }
