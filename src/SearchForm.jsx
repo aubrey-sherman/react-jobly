@@ -7,18 +7,21 @@
  */
 
 function SearchForm() {
+  console.log("* SearchForm");
+
+
   return (
     <form>
       <div className="row justify-content-center">
         <div className="col-8">
-          <input type="text" className="form-control form-control-lg" placeholder="Enter search term..."/>
+          <input type="text" className="form-control form-control-lg" placeholder="Enter search term..." />
         </div>
         <div className="col-auto">
           <button type="submit" className="btn btn-lg btn-primary">Search</button>
         </div>
       </div>
     </form>
-  )
+  );
 }
 
 export default SearchForm;
