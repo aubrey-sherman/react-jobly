@@ -28,24 +28,30 @@ function CompanyList() {
   const [companies, setCompanies] = useState({data: null, isLoading: true});
   const [searchParam, setSearchParam] = useState("");
 
-  useEffect(function fetchCompaniesOnMount() {
-    async function fetchCompanies() {
-      const companyResponse = await JoblyApi.request("companies");
-      setCompanies(
-        {
-          data: companyResponse.companies,
-          isLoading: false
-        }
-      );
-    }
-    fetchCompanies();
-  }, [ ]);
+  // useEffect(function fetchCompaniesOnMount() {
+  //   async function fetchCompanies() {
+  //     const companyResponse = await JoblyApi.request("companies");
+  //     setCompanies(
+  //       {
+  //         data: companyResponse.companies,
+  //         isLoading: false
+  //       }
+  //     );
+  //   }
+  //   fetchCompanies();
+  // }, [ ]);
 
 
   useEffect(function fetchCompaniesOnSearch() {
     companies.isLoading = true;
     async function fetchCompanies() {
-      const companyResponse = await JoblyApi.request("companies", {nameLike: searchParam});
+      let companyResponse;
+      if(searchParam === "") {
+        companyResponse = await JoblyApi.request("companies");
+      }
+      else {
+        companyResponse = await JoblyApi.request("companies", {nameLike: searchParam});
+      }
       setCompanies(
         {
           data: companyResponse.companies,
@@ -66,6 +72,10 @@ function CompanyList() {
   return (
     <div>
       <SearchForm onSubmit={onCompanySearch}/>
+      {searchParam
+        ? <h3>Results for '{searchParam}'</h3>
+        : <h3>All Companies</h3>
+      }
       <CompanyCardList companies={companies.data} />
     </div>
   );
