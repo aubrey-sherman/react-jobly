@@ -2,24 +2,21 @@ import { useState } from 'react';
 import logo from './logo.svg'
 import './App.css';
 
+import RoutesList from './RoutesList.jsx';
+
 
 /** Component for entire page.
  *
  * Props: none
  * State: none
  *
+ * App -> RoutesList
 */
 
 function App() {
-  const [count, setCount] = useState(0);
-
-  function incrCount() {
-    setCount(count => count + 1);
-  }
-
   return (
     <div className="App">
-
+      <RoutesList />
     </div>
   );
 };
