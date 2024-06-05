@@ -9,12 +9,11 @@
 function JobCard({ job }) {
   console.log("* JobCard", job);
 
-
   return (
     <div>
       <p>{job.title}</p>
-      <p>{job.salary}</p>
-      <p>{job.equity}</p>
+      <p>Salary: {job.salary}</p>
+      <p>Equity: {job.equity}</p>
     </div>
   );
 }
