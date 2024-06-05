@@ -14,11 +14,11 @@ function CompanyCardList({ companies }) {
 
   return (
     <div>
-      <ul className="list-group">
+      <div>
         {companies.map(company => {
-          return (<li key={company.handle} className="list-group-item"><CompanyCard /></li>);
+          return (<div key={company.handle} className="card-body border"><CompanyCard company={company}/></div>);
         })}
-      </ul>
+      </div>
     </div >
   );
 }
