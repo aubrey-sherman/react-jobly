@@ -9,28 +9,29 @@ import "./CompanyCard.css";
  * CompanyCardList -> CompanyCard
  */
 
-const defaultData = {
-  handle: "j_and_a",
-  name: "Jacob and Aubrey LLC",
-  description: "white hat hacking since 2024",
-  jobs: [
-    {
-      "id": 91,
-      "title": "Hacker",
-      "salary": 122000,
-      "equity": "0.047"
-    },
-  ]
-};
+// const defaultData = {
+//   handle: "j_and_a",
+//   name: "Jacob and Aubrey LLC",
+//   description: "white hat hacking since 2024",
+//   jobs: [
+//     {
+//       "id": 91,
+//       "title": "Hacker",
+//       "salary": 122000,
+//       "equity": "0.047"
+//     },
+//   ]
+// };
 
-function CompanyCard({ company = defaultData }) {
+function CompanyCard({ company }) {
   console.log("* CompanyCard", company);
-
 
   return (
     <NavLink to={`/companies/${company.handle}`}>
       <div>
-        <img src="https://cdn11.bigcommerce.com/s-nf2x4/images/stencil/960w/products/581/9741/Cowboy-white-Rubber-Duck-Adline-2__09087.1653230173.jpg" />
+        {company.logoUrl &&
+          <img src={company.logoUrl}/>
+        }
         <p><b>{company.name}</b></p>
         <p>{company.description}</p>
       </div>
