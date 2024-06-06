@@ -11,27 +11,42 @@ import Logout from "./Logout.jsx";
 
 /** Routes for Jobly
  *
- * Props: None
+ * Props: currUser => {
+ *                      username,
+ *                      firstName,
+ *                      lastName,
+ *                      isAdmin,
+ *                      email,
+ *                      applications: [jobID, ...]
+ *                    }
  * State: None
  *
  * App -> RoutesList -> {Navigation, Homepage, CompanyList, CompanyDetail, JobList}
  */
 
-function RoutesList() {
+function RoutesList({ currUser }) {
   console.log("* RoutesList");
   return (
     <div>
       <BrowserRouter>
-        <Navigation />
+        <Navigation currUser={currUser} />
         <Routes>
           <Route path="/" element={<Homepage />} />
-          <Route path="/login" element={<LoginForm />} />
-          <Route path="/signup" element={<SignupForm />} />
-          <Route path="/profile" element={<ProfileForm />} />
-          <Route path="logout" element={<Logout />} />
-          <Route path="/companies" element={<CompanyList />} />
-          <Route path="/companies/:handle" element={<CompanyDetail />} />
-          <Route path="/jobs" element={<JobList />} />
+          {currUser === null
+            ?
+            <div>
+              <Route path="/login" element={<LoginForm />} />
+              <Route path="/signup" element={<SignupForm />} />
+            </div>
+            :
+            <div>
+              <Route path="/profile" element={<ProfileForm />} />
+              <Route path="/logout" element={<Logout />} />
+              <Route path="/companies" element={<CompanyList />} />
+              <Route path="/companies/:handle" element={<CompanyDetail />} />
+              <Route path="/jobs" element={<JobList />} />
+            </div>
+          }
           <Route path="*" element={<Navigate to={"/"} />} />
         </Routes>
       </BrowserRouter>
