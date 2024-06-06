@@ -11,21 +11,8 @@ import JobCardList from "./JobCardList.jsx";
  * RoutesList -> CompanyDetail -> JobCardList
  */
 
-// const defaultData = {
-//   name: "Jacob and Aubrey LLC",
-//   description: "white hat hacking since 2024",
-//   jobs: [
-//     {
-//       "id": 91,
-//       "title": "Hacker",
-//       "salary": 122000,
-//       "equity": "0.047"
-//     },
-//   ]
-// };
-
 function CompanyDetail() {
-  const [company, setCompany] = useState({data: null, isLoading: true});
+  const [company, setCompany] = useState({ data: null, isLoading: true });
   const { handle } = useParams();
   console.log("* CompanyDetail", company, handle);
 
@@ -40,7 +27,7 @@ function CompanyDetail() {
     fetchCompany();
   }, []);
 
-  if(company.isLoading) return <p>Loading...</p>;
+  if (company.isLoading) return <p>Loading...</p>;
 
   return (
     <div>
