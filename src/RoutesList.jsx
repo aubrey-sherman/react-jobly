@@ -32,13 +32,13 @@ function RoutesList({ currUser }) {
         <Navigation currUser={currUser} />
         <Routes>
           <Route path="/" element={<Homepage />} />
-          {currUser === null
-            ?
+          {currUser === null &&
             <>
               <Route path="/login" element={<LoginForm />} />
               <Route path="/signup" element={<SignupForm />} />
             </>
-            :
+          }
+          {currUser !== null &&
             <>
               <Route path="/profile" element={<ProfileForm />} />
               <Route path="/logout" element={<Logout />} />
