@@ -4,6 +4,10 @@ import Homepage from "./Homepage.jsx";
 import CompanyList from "./CompanyList.jsx";
 import CompanyDetail from "./CompanyDetail.jsx";
 import JobList from "./JobList.jsx";
+import LoginForm from "./LoginForm.jsx";
+import SignupForm from "./SignupForm.jsx";
+import ProfileForm from "./ProfileForm.jsx";
+import Logout from "./Logout.jsx";
 
 /** Routes for Jobly
  *
@@ -22,6 +26,10 @@ function RoutesList() {
         <Navigation />
         <Routes>
           <Route path="/" element={<Homepage />} />
+          <Route path="/login" element={<LoginForm />} />
+          <Route path="/signup" element={<SignupForm />} />
+          <Route path="/profile" element={<ProfileForm />} />
+          <Route path="logout" element={<Logout />} />
           <Route path="/companies" element={<CompanyList />} />
           <Route path="/companies/:handle" element={<CompanyDetail />} />
           <Route path="/jobs" element={<JobList />} />
