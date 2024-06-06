@@ -1,6 +1,5 @@
 import './App.css';
-
-import RoutesList from './RoutesList.jsx';
+import JoblyApp from './JoblyApp.jsx';
 
 
 /** Component for entire page.
@@ -8,13 +7,13 @@ import RoutesList from './RoutesList.jsx';
  * Props: none
  * State: none
  *
- * App -> RoutesList
+ * App -> JoblyApp
 */
 
 function App() {
   return (
     <div className="App">
-      <RoutesList />
+      <JoblyApp />
     </div>
   );
 };
