@@ -1,5 +1,7 @@
 import JobCardList from "./JobCardList.jsx";
 import SearchForm from "./SearchForm.jsx";
+import JoblyApi from "./api.js";
+import { useState, useEffect } from "react";
 
 /** List of all jobs
  *
@@ -9,26 +11,43 @@ import SearchForm from "./SearchForm.jsx";
  * RoutesList -> JobList -> {SearchForm, JobCardList}
  */
 
-const defaultData = {
-  jobs:
-    [{
-      id: 91,
-      title: "Hacker",
-      salary: 122000,
-      equity: 0.047,
-      companyHandle: "j_and_a",
-      companyName: "Jacob and Aubrey LLC"
-    }
-    ]
-};
-
 function JobList() {
-  console.log("* JobList");
+  const [jobs, setJobs] = useState({ data: null, isLoading: true });
+  const [searchParam, setSearchParam] = useState("");
+  console.log("* JobList", { jobs, searchParam });
+
+  useEffect(function fetchJobsOnSearch() {
+    jobs.isLoading = true;
+    async function fetchJobs() {
+      let jobResponse;
+      if (searchParam === '') {
+        jobResponse = await JoblyApi.getJobs();
+      } else {
+        jobResponse = await JoblyApi.findJobs({ title: searchParam });
+      }
+      setJobs(
+        {
+          data: jobResponse,
+          isLoading: false
+        }
+      );
+    }
+    fetchJobs();
+  }, [searchParam]);
+
+  function onJobSearch(searchParam) {
+    setSearchParam(searchParam);
+  }
+
+  if (jobs.isLoading) return <p>Loading...</p>;
 
   return (
     <div>
-      <SearchForm />
-      <JobCardList jobs={defaultData.jobs} />
+      <SearchForm onSubmit={onJobSearch} />
+      {searchParam
+        ? <h3>Results for '{searchParam}'</h3>
+        : <h3>All Jobs</h3>}
+      <JobCardList jobs={jobs.data} />
     </div>
   );
 }
