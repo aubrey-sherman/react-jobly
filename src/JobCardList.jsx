@@ -2,12 +2,14 @@ import JobCard from "./JobCard";
 
 /** List of job components
  *
- * Props: array of job objects
+ * Props: array of job objects like
+ *      [{id, title, salary, equity}, ...]
  * State: None
  *
  *
  * JobList -> JobCardList
  */
+
 function JobCardList({ jobs }) {
   console.log("* JobCardList", jobs);
 

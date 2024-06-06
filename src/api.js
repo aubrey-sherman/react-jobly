@@ -54,7 +54,8 @@ class JoblyApi {
 
   /** Search for companies with search term query */
 
-  static async findCompanies(data) {
+  static async findCompanies(searchParam) {
+    const data = {nameLike: searchParam};
     let res = await this.request(`companies/`, data);
     return res.companies;
   }
@@ -76,7 +77,8 @@ class JoblyApi {
 
   /** Search for jobs with search term query */
 
-  static async findJobs(data) {
+  static async findJobs(searchParam) {
+    const data = {title: searchParam};
     let res = await this.request(`jobs/`, data);
     return res.jobs;
   }

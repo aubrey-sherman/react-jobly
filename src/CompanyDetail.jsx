@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import JoblyApi from "./api.js";
 import JobCardList from "./JobCardList.jsx";
@@ -18,14 +18,14 @@ function CompanyDetail() {
 
   useEffect(function fetchCompanyOnRender() {
     async function fetchCompany() {
-      const companyResponse = await JoblyApi.request(`companies/${handle}`);
+      const companyResponse = await JoblyApi.getCompany(handle);
       setCompany({
-        data: companyResponse.company,
+        data: companyResponse,
         isLoading: false
       });
     }
     fetchCompany();
-  }, []);
+  }, [handle]);
 
   if (company.isLoading) return <p>Loading...</p>;
 

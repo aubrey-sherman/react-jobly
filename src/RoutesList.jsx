@@ -1,4 +1,4 @@
-import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { Routes, Route, BrowserRouter, Navigate } from "react-router-dom";
 import Navigation from "./Navigation.jsx";
 import Homepage from "./Homepage.jsx";
 import CompanyList from "./CompanyList.jsx";
@@ -19,7 +19,6 @@ import Logout from "./Logout.jsx";
 
 function RoutesList() {
   console.log("* RoutesList");
-
   return (
     <div>
       <BrowserRouter>
@@ -33,7 +32,7 @@ function RoutesList() {
           <Route path="/companies" element={<CompanyList />} />
           <Route path="/companies/:handle" element={<CompanyDetail />} />
           <Route path="/jobs" element={<JobList />} />
-          <Route path="*" element={<Homepage />} />
+          <Route path="*" element={<Navigate to={"/"} />} />
         </Routes>
       </BrowserRouter>
     </div>

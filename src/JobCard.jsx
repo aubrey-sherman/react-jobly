@@ -1,6 +1,7 @@
 /** Job card
  *
- * Props: job object
+ * Props: job object like
+ *        {id, title, salary, equity}
  * State: None
  *
  * JobCardList -> JobCard

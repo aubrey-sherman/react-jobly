@@ -8,10 +8,11 @@ import { useState } from "react";
  * {CompanyList, JobList} -> SearchForm
  */
 
-function SearchForm({ onSubmit }) {
+function SearchForm({ handleSearch }) {
   const [formData, setFormData] = useState({searchParam: ""});
   console.log("* SearchForm", formData);
 
+  /** Update formData as user types into search bar */
   function handleChange(evt) {
     const fieldName = evt.target.name;
     const value = evt.target.value;
@@ -22,9 +23,10 @@ function SearchForm({ onSubmit }) {
     });
   }
 
+  /** Sends formData to parent component on form submission */
   function handleSubmit(evt) {
     evt.preventDefault();
-    onSubmit(formData.searchParam);
+    handleSearch(formData.searchParam);
   }
 
   return (
