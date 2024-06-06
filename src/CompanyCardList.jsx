@@ -16,7 +16,12 @@ function CompanyCardList({ companies }) {
     <div>
       <div>
         {companies.map(company => {
-          return (<div key={company.handle} className="card-body border"><CompanyCard company={company}/></div>);
+          return (
+            <div
+              key={company.handle}
+              className="card-body border">
+              <CompanyCard company={company} />
+            </div>);
         })}
       </div>
     </div >
