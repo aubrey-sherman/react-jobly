@@ -11,50 +11,24 @@ import { useState, useEffect } from "react";
  * RoutesList -> CompanyList -> {SearchForm, CompanyCardList}
  */
 
-// const defaultData = {
-//   companies: [
-//     {
-//       handle: "j_and_a",
-//       name: "Jacob and Aubrey LLC",
-//       description: "white hat hacking since 2024",
-//       numEmployees: 3,
-//       logoUrl: 'https://cdn11.bigcommerce.com/s-nf2x4/images/stencil/960w/products/581/9741/Cowboy-white-Rubber-Duck-Adline-2__09087.1653230173.jpg'
-//     }
-//   ]
-// };
-
 function CompanyList() {
-  console.log("* CompanyList");
-  const [companies, setCompanies] = useState({data: null, isLoading: true});
+  const [companies, setCompanies] = useState({ data: null, isLoading: true });
   const [searchParam, setSearchParam] = useState("");
-
-  // useEffect(function fetchCompaniesOnMount() {
-  //   async function fetchCompanies() {
-  //     const companyResponse = await JoblyApi.request("companies");
-  //     setCompanies(
-  //       {
-  //         data: companyResponse.companies,
-  //         isLoading: false
-  //       }
-  //     );
-  //   }
-  //   fetchCompanies();
-  // }, [ ]);
-
+  console.log("* CompanyList", { companies, searchParam });
 
   useEffect(function fetchCompaniesOnSearch() {
     companies.isLoading = true;
     async function fetchCompanies() {
       let companyResponse;
-      if(searchParam === "") {
-        companyResponse = await JoblyApi.request("companies");
+      if (searchParam === "") {
+        companyResponse = await JoblyApi.getCompanies();
       }
       else {
-        companyResponse = await JoblyApi.request("companies", {nameLike: searchParam});
+        companyResponse = await JoblyApi.findCompanies({ nameLike: searchParam });
       }
       setCompanies(
         {
-          data: companyResponse.companies,
+          data: companyResponse,
           isLoading: false
         }
       );
@@ -71,7 +45,7 @@ function CompanyList() {
 
   return (
     <div>
-      <SearchForm onSubmit={onCompanySearch}/>
+      <SearchForm onSubmit={onCompanySearch} />
       {searchParam
         ? <h3>Results for '{searchParam}'</h3>
         : <h3>All Companies</h3>
