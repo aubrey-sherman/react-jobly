@@ -81,7 +81,23 @@ class JoblyApi {
     return res.jobs;
   }
 
-  // obviously, you'll add a lot here ...
+  static async registerUser({ username, password, firstName, lastName, email }) {
+    let res = await this.request('/register', {
+      username,
+      password,
+      firstName,
+      lastName,
+      email
+    },
+      "POST");
+
+    return res.token; // TODO: verify correct return
+  }
+
+
+  //TODO: Login method
+
+  //TODO: updateProfile method
 }
 
 // /** Get details on a job by ID */
