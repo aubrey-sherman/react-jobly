@@ -30,7 +30,7 @@ function Navigation({ currUser }) {
         </li>
         {currUser === null
         ?
-        <div>
+        <>
           <li className="nav-item px-2">
             <NavLink
               to={'/login'}
@@ -46,9 +46,9 @@ function Navigation({ currUser }) {
               Signup
             </NavLink>
           </li>
-        </div>
+        </>
         :
-        <div>
+        <>
           <li className="nav-item px-2">
             <NavLink
               to={'/companies'}
@@ -80,7 +80,7 @@ function Navigation({ currUser }) {
               Logout {currUser.username}
             </NavLink>
           </li>
-        </div>
+        </>
         }
       </ul>
     </nav>

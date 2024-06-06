@@ -34,18 +34,18 @@ function RoutesList({ currUser }) {
           <Route path="/" element={<Homepage />} />
           {currUser === null
             ?
-            <div>
+            <>
               <Route path="/login" element={<LoginForm />} />
               <Route path="/signup" element={<SignupForm />} />
-            </div>
+            </>
             :
-            <div>
+            <>
               <Route path="/profile" element={<ProfileForm />} />
               <Route path="/logout" element={<Logout />} />
               <Route path="/companies" element={<CompanyList />} />
               <Route path="/companies/:handle" element={<CompanyDetail />} />
               <Route path="/jobs" element={<JobList />} />
-            </div>
+            </>
           }
           <Route path="*" element={<Navigate to={"/"} />} />
         </Routes>
