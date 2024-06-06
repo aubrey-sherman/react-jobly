@@ -7,6 +7,8 @@ import { useState, useEffect } from "react";
  *
  * Props: None
  * State: Array of companies, Search parameter
+ * Effect: fetches companies on mount, re-searches when a new
+ *         search param is received
  *
  * RoutesList -> CompanyList -> {SearchForm, CompanyCardList}
  */
@@ -17,14 +19,13 @@ function CompanyList() {
   console.log("* CompanyList", { companies, searchParam });
 
   useEffect(function fetchCompaniesOnSearch() {
-    companies.isLoading = true;
     async function fetchCompanies() {
       let companyResponse;
       if (searchParam === "") {
         companyResponse = await JoblyApi.getCompanies();
       }
       else {
-        companyResponse = await JoblyApi.findCompanies({ nameLike: searchParam });
+        companyResponse = await JoblyApi.findCompanies(searchParam);
       }
       setCompanies(
         {
@@ -36,8 +37,11 @@ function CompanyList() {
     fetchCompanies();
   }, [searchParam]);
 
-
+  /** Update company and search param state when
+   *  a new parameter is received
+   */
   function onCompanySearch(searchParam) {
+    setCompanies(currCompanies => ({...currCompanies, isLoading: true}));
     setSearchParam(searchParam);
   }
 
@@ -45,7 +49,7 @@ function CompanyList() {
 
   return (
     <div>
-      <SearchForm onSubmit={onCompanySearch} />
+      <SearchForm handleSearch={onCompanySearch} />
       {searchParam
         ? <h3>Results for '{searchParam}'</h3>
         : <h3>All Companies</h3>
