@@ -8,17 +8,19 @@ import JobCard from "./JobCard";
  *
  * JobList -> JobCardList
  */
-
 function JobCardList({ jobs }) {
   console.log("* JobCardList", jobs);
 
   return (
     <div>
-      <ul className="list-group">
+      <div>
         {jobs.map(job => {
-          return (<li key={job.id} className="list-group-item"> <JobCard job={job} /></li>);
+          return (
+            <div key={job.id} className="card-body border">
+              <JobCard job={job} />
+            </div>);
         })}
-      </ul>
+      </div>
     </div >
   );
 };
