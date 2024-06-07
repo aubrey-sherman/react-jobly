@@ -84,7 +84,7 @@ class JoblyApi {
   }
 
   static async registerUser({ username, password, firstName, lastName, email }) {
-    let res = await this.request('/register', {
+    let res = await this.request('register', {
       username,
       password,
       firstName,
@@ -105,7 +105,7 @@ class JoblyApi {
    */
 
   static async logInUser({ username, password }) {
-    let res = await this.request('/token', {
+    let res = await this.request('auth/token', {
       username,
       password
     },
@@ -117,6 +117,11 @@ class JoblyApi {
     } else if (res.error) {
       return res.error;
     }
+  }
+
+  static async getUserDetails(username) {
+    let res = await this.request(`users/${username}`);
+    return res.user;
   }
 
   //TODO: updateProfile method
