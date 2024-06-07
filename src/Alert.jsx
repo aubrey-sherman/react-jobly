@@ -1,3 +1,5 @@
+import { v4 as uuid } from "uuid";
+
 /** Shows alerts from forms
  *
  * Props: array of alert messages
@@ -7,10 +9,8 @@
  */
 function Alert({ messages }) {
   return (
-    <div>
-      {messages.map(message => {
-        return <div>{message}</div>
-      })}
+    <div className="alert alert-danger">
+      {messages.map(message => <p key={uuid()}>{message}</p>)}
     </div>
   );
 }
