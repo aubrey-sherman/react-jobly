@@ -26,7 +26,7 @@ import Logout from "./Logout.jsx";
  * JoblyApp -> RoutesList -> {Navigation, LoginForm, SignupForm, Logout, Homepage, CompanyList, CompanyDetail, JobList}
  */
 
-function RoutesList({ currUser, handleLogin }) {
+function RoutesList({ currUser, handleLogin, errors }) {
   console.log("* RoutesList");
   return (
     <div>
@@ -36,7 +36,7 @@ function RoutesList({ currUser, handleLogin }) {
           <Route path="/" element={<Homepage />} />
           {currUser === null &&
             <>
-              <Route path="/login" element={<LoginForm handleLogin={handleLogin}/>} />
+              <Route path="/login" element={<LoginForm handleLogin={handleLogin} errors={errors} />} />
               <Route path="/signup" element={<SignupForm />} />
             </>
           }
