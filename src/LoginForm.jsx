@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { v4 as uuid } from "uuid";
+import Alert from "./Alert.jsx";
 
 /** Login form for Jobly
  *
@@ -53,9 +55,7 @@ function LoginForm({ handleLogin, errors }) {
           <button type="submit" className="btn btn-lg btn-primary">Login</button>
         </div>
       </div>
-      {errors.length > 0 &&
-        <div className="Login-Errors alert alert-danger">{errors.map(error => <p>{error}</p>)}
-        </div>}
+      {errors.length > 0 && <Alert messages={errors}/>}
     </form>
   );
 }
