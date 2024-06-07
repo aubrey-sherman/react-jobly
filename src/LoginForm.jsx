@@ -9,8 +9,8 @@ import { useState } from "react";
  * RoutesList -> LoginForm
 */
 
-function LoginForm({ handleLogin }) {
-  const [formData, setFormData] = useState({username: "", password: ""});
+function LoginForm({ handleLogin, errors }) {
+  const [formData, setFormData] = useState({ username: "", password: "" });
   console.log("LoginForm", formData);
 
   /** Update formData as user types into form fields */
@@ -42,7 +42,7 @@ function LoginForm({ handleLogin }) {
             onChange={handleChange}
           />
           <input
-            type="text"
+            type="password"
             name="password"
             className="form-control form-control-lg"
             placeholder="password"
@@ -53,6 +53,9 @@ function LoginForm({ handleLogin }) {
           <button type="submit" className="btn btn-lg btn-primary">Login</button>
         </div>
       </div>
+      {errors.length > 0 &&
+        <div className="Login-Errors alert alert-danger">{errors.map(error => <p>{error}</p>)}
+        </div>}
     </form>
   );
 }
