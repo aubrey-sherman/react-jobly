@@ -27,18 +27,18 @@ import ProfileForm from "./ProfileForm.jsx";
  * JoblyApp -> RoutesList -> {Navigation, LoginForm, SignupForm, Logout, Homepage, CompanyList, CompanyDetail, JobList}
  */
 
-function RoutesList({ currUser, handleLogin, handleLogout, errors }) {
+function RoutesList({ currUser, handleLogin, handleLogout, handleSignup, errors }) {
   console.log("* RoutesList");
   return (
     <div>
       <BrowserRouter>
-        <Navigation currUser={currUser} handleLogout={handleLogout}/>
+        <Navigation currUser={currUser} handleLogout={handleLogout} />
         <Routes>
           <Route path="/" element={<Homepage />} />
           {currUser === null &&
             <>
               <Route path="/login" element={<LoginForm handleLogin={handleLogin} errors={errors} />} />
-              <Route path="/signup" element={<SignupForm />} />
+              <Route path="/signup" element={<SignupForm handleSignup={handleSignup} errors={errors} />} />
             </>
           }
           {currUser !== null &&
