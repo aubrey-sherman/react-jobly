@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import RoutesList from './RoutesList.jsx';
 import JoblyApi from './api.js';
+import userContext from './userContext.js';
 
 
 /** Component for entire page.
@@ -53,7 +54,10 @@ function JoblyApp() {
     }
   }
 
-  //TODO: make handleSignup and handleLogout functions
+  /** */
+  async function handleSignup(formData) {
+    console.log("handleSignup: formData:", formData);
+  }
 
   useEffect(function fetchUserDataOnLogin() {
     async function fetchUserData() {
@@ -73,9 +77,24 @@ function JoblyApp() {
   }, [token]);
 
 
+  function handleLogout() {
+    setCurrUser(currData => null);
+    setToken(currToken => "");
+    setErrors(currErrors => []);
+  }
+  //TODO: make handleSignup and handleLogout functions
+
+
   return (
     <div className="JoblyApp">
-      <RoutesList currUser={currUser} handleLogin={handleLogin} errors={errors} />
+      <userContext.Provider value={{user: currUser}}>
+        <RoutesList
+          currUser={currUser}
+          handleLogin={handleLogin}
+          handleLogout={handleLogout}
+          errors={errors}
+        />
+      </userContext.Provider>
     </div>
   );
 };
