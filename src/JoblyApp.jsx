@@ -19,6 +19,8 @@ import userContext from './userContext.js';
  *                    }
  *        token (string)
  *
+ * Effect: fetches user data upon successful login
+ *
  * App -> RoutesList
 */
 
@@ -72,12 +74,17 @@ function JoblyApp() {
   }, [token]);
 
 
+  /** Logs out current user by resetting states*/
   function handleLogout() {
     setCurrUser(currData => null);
     setToken(currToken => "");
     setErrors(currErrors => []);
   }
 
+  /** Signs up a user when given valid input data
+   *
+   * Calls login function upon successful signup
+   */
   async function handleSignup(formData) {
     let signupResponse;
     try {
