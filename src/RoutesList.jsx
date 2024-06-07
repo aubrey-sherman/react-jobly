@@ -20,14 +20,14 @@ import ProfileForm from "./ProfileForm.jsx";
  *                    }
  *        handleLogin function
  *        handleLogout function
- *        errors array
+ *        handleSignup function
  *
  * State: None
  *
  * JoblyApp -> RoutesList -> {Navigation, LoginForm, SignupForm, Logout, Homepage, CompanyList, CompanyDetail, JobList}
  */
 
-function RoutesList({ currUser, handleLogin, handleLogout, handleSignup, errors }) {
+function RoutesList({ currUser, handleLogin, handleLogout, handleSignup }) {
   console.log("* RoutesList");
   return (
     <div>
@@ -37,8 +37,8 @@ function RoutesList({ currUser, handleLogin, handleLogout, handleSignup, errors 
           <Route path="/" element={<Homepage />} />
           {currUser === null &&
             <>
-              <Route path="/login" element={<LoginForm handleLogin={handleLogin} errors={errors} />} />
-              <Route path="/signup" element={<SignupForm handleSignup={handleSignup} errors={errors} />} />
+              <Route path="/login" element={<LoginForm handleLogin={handleLogin} />} />
+              <Route path="/signup" element={<SignupForm handleSignup={handleSignup}  />} />
             </>
           }
           {currUser !== null &&
