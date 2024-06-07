@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import { jwtDecode } from 'jwt-decode';
+
 import { Navigate } from 'react-router-dom';
 import RoutesList from './RoutesList.jsx';
 import JoblyApi from './api.js';
@@ -27,47 +29,42 @@ import userContext from './userContext.js';
 function JoblyApp() {
   const [currUser, setCurrUser] = useState(null);
   const [token, setToken] = useState("");
-  const [errors, setErrors] = useState([]);
-  console.log("* JoblyApp", { currUser, token, errors });
+
+  console.log("* JoblyApp", { currUser, token });
 
   /** Logs in a user with a valid username/password.
    *
    * Updates state with token.
    * If login fails to authenticate, renders error message.
   */
-  async function handleLogin(formData) {
-    console.log("handleLogin: formData", formData);
 
-    let loginResponse;
-    try {
-      loginResponse = await JoblyApi.logInUser(formData);
-    } catch (errs) {
-      console.log("Errors=", errs);
-      console.log("loginResponse", loginResponse);
-      setErrors(errs);
-    }
+  async function handleLogin({ username, password }) {
+    console.log("handleLogin: formData", username, password);
 
-    if (loginResponse) {
-      setToken(loginResponse);
-      setCurrUser({
-        username: formData.username
-      });
+    const apiToken = await JoblyApi.logInUser({username, password});
+
+    if (apiToken) {
+      setToken(apiToken);
       <Navigate to={"/"} />;
     }
   }
 
   useEffect(function fetchUserDataOnLogin() {
     async function fetchUserData() {
-      if (currUser !== null) {
-        const userResponse = await JoblyApi.getUserDetails(currUser.username);
-        setCurrUser(currUserData => ({
-          ...currUserData,
-          firstName: userResponse.firstName,
-          lastName: userResponse.lastName,
-          email: userResponse.email,
-          isAdmin: userResponse.isAdmin,
-          applications: userResponse.applications
-        }));
+      if (token !== "") {
+        const username = jwtDecode(token).username;
+        const userData = await JoblyApi.getUserDetails(username);
+
+        if (userData) {
+          setCurrUser({
+            username: username,
+            firstName: userData.firstName,
+            lastName: userData.lastName,
+            email: userData.email,
+            isAdmin: userData.isAdmin,
+            applications: userData.applications
+          });
+        }
       }
     }
     fetchUserData();
@@ -76,28 +73,29 @@ function JoblyApp() {
 
   /** Logs out current user by resetting states*/
   function handleLogout() {
-    setCurrUser(currData => null);
-    setToken(currToken => "");
-    setErrors(currErrors => []);
+    setCurrUser(null);
+    setToken("");
+    setErrors([]);
   }
 
   /** Signs up a user when given valid input data
    *
    * Calls login function upon successful signup
    */
-  async function handleSignup(formData) {
-    let signupResponse;
-    try {
-      signupResponse = await JoblyApi.registerUser(formData);
-    } catch (errs) {
-      console.log("Errors=", errs);
-      console.log("signupResponse", signupResponse);
-      setErrors(errs);
+  async function handleSignup({username, password, firstName, lastName, email}) {
+    const userData = {
+      username,
+      password,
+      firstName,
+      lastName,
+      email
     }
+    const apiToken = await JoblyApi.registerUser(userData);
+    setToken(apiToken);
 
-    if (signupResponse) {
-      await handleLogin(
-        { username: formData.username, password: formData.password });
+    if (apiToken) {
+      setToken(apiToken);
+      <Navigate to={'/'} />;
     }
   }
 
@@ -110,11 +108,10 @@ function JoblyApp() {
           handleLogin={handleLogin}
           handleLogout={handleLogout}
           handleSignup={handleSignup}
-          errors={errors}
         />
       </userContext.Provider>
     </div>
   );
-};
+}
 
 export default JoblyApp;
