@@ -84,7 +84,7 @@ class JoblyApi {
   }
 
   static async registerUser({ username, password, firstName, lastName, email }) {
-    let res = await this.request('register', {
+    let res = await this.request('auth/register', {
       username,
       password,
       firstName,
@@ -93,7 +93,7 @@ class JoblyApi {
     },
       "POST");
 
-    return res.token; // TODO: verify correct return
+    return res.token;
   }
 
   /** Logs in a user with a valid username and password.
