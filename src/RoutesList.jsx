@@ -7,7 +7,6 @@ import JobList from "./JobList.jsx";
 import LoginForm from "./LoginForm.jsx";
 import SignupForm from "./SignupForm.jsx";
 import ProfileForm from "./ProfileForm.jsx";
-import Logout from "./Logout.jsx";
 
 /** Routes for Jobly
  *
@@ -20,18 +19,20 @@ import Logout from "./Logout.jsx";
  *                      applications: [jobID, ...]
  *                    }
  *        handleLogin function
+ *        handleLogout function
+ *        errors array
  *
  * State: None
  *
  * JoblyApp -> RoutesList -> {Navigation, LoginForm, SignupForm, Logout, Homepage, CompanyList, CompanyDetail, JobList}
  */
 
-function RoutesList({ currUser, handleLogin, errors }) {
+function RoutesList({ currUser, handleLogin, handleLogout, errors }) {
   console.log("* RoutesList");
   return (
     <div>
       <BrowserRouter>
-        <Navigation currUser={currUser} />
+        <Navigation currUser={currUser} handleLogout={handleLogout}/>
         <Routes>
           <Route path="/" element={<Homepage />} />
           {currUser === null &&
@@ -43,7 +44,6 @@ function RoutesList({ currUser, handleLogin, errors }) {
           {currUser !== null &&
             <>
               <Route path="/profile" element={<ProfileForm />} />
-              <Route path="/logout" element={<Logout />} />
               <Route path="/companies" element={<CompanyList />} />
               <Route path="/companies/:handle" element={<CompanyDetail />} />
               <Route path="/jobs" element={<JobList />} />
