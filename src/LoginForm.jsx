@@ -4,15 +4,16 @@ import Alert from "./Alert.jsx";
 
 /** Login form for Jobly
  *
- * Props: handleLogin function, errors like ["message1", ...]
- * State: formData
+ * Props: handleLogin function
+ * State: formData, errors
  *
  *
  * RoutesList -> LoginForm
 */
 
-function LoginForm({ handleLogin, errors }) {
+function LoginForm({ handleLogin }) {
   const [formData, setFormData] = useState({ username: "", password: "" });
+  const [errors, setErrors] = useState([]);
   console.log("LoginForm", formData);
 
   /** Update formData as user types into form fields */
@@ -27,9 +28,14 @@ function LoginForm({ handleLogin, errors }) {
   }
 
   /** Sends formData to JoblyApp on form submission */
-  function handleSubmit(evt) {
+  async function handleSubmit(evt) {
     evt.preventDefault();
-    handleLogin(formData);
+    try{
+      await handleLogin(formData);
+    }
+    catch (errs) {
+      setErrors(errs);
+    }
   }
 
   return (

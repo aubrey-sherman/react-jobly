@@ -5,13 +5,21 @@ import Alert from "./Alert.jsx";
 /** Signup form for Jobly
  *
  * Props: handleSignup function, errors like ["message1", ...]
- * State: formData
+ * State: formData, errors
  *
  * RoutesList -> Signup Form
-  */
+*/
 
-function SignupForm({ handleSignup, errors }) {
-  const [formData, setFormData] = useState({ username: "", password: "" });
+function SignupForm({ handleSignup }) {
+  const defaultFormData = {
+    username: "",
+    password: "",
+    firstName: "",
+    lastName: "",
+    email: ""
+  };
+  const [formData, setFormData] = useState(defaultFormData);
+  const [errors, setErrors] = useState([]);
   console.log("SignupForm", formData);
 
   /** Update formData as user types into form fields */
@@ -26,9 +34,14 @@ function SignupForm({ handleSignup, errors }) {
   }
 
   /** Sends formData to JoblyApp on form submission */
-  function handleSubmit(evt) {
+  async function handleSubmit(evt) {
     evt.preventDefault();
-    handleSignup(formData);
+    try {
+      await handleSignup(formData);
+    }
+    catch (errs) {
+      setErrors(errs);
+    }
   }
 
   return (
@@ -72,8 +85,8 @@ function SignupForm({ handleSignup, errors }) {
           />
           <button type="submit" className="btn btn-lg btn-primary">Submit</button>
         </div>
-        {errors.length > 0 && <Alert messageStyle="alert alert-danger" messages={errors} />}
       </div>
+      {errors.length > 0 && <Alert messageStyle="alert alert-danger" messages={errors} />}
     </form>
   );
 
