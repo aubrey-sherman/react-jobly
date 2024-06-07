@@ -24,27 +24,32 @@ import JoblyApi from './api.js';
 function JoblyApp() {
   const [currUser, setCurrUser] = useState(null);
   const [token, setToken] = useState("");
+  const [errors, setErrors] = useState([]);
+  console.log("* JoblyApp", { currUser, token, errors });
 
   /** Logs in a user with a valid username/password.
    *
    * Updates state with token.
    * If login fails to authenticate, renders error message.
   */
-
-  //TODO: probably need to try/catch the logInUser method. Figure out how to catch bad login input.
   async function handleLogin(formData) {
     console.log("handleLogin: formData", formData);
-    const loginResponse = await JoblyApi.logInUser(formData);
-    console.log("loginResponse", loginResponse);
+
+    let loginResponse;
+    try {
+      loginResponse = await JoblyApi.logInUser(formData);
+    } catch (errs) {
+      console.log("Errors=", errs);
+      console.log("loginResponse", loginResponse);
+      setErrors(errs);
+    }
+
     if (loginResponse) {
-      console.log("setToken, setCurrUser");
-      setToken(JoblyApi.token);
+      setToken(loginResponse);
       setCurrUser({
         username: formData.username
       });
       <Navigate to={"/"} />;
-    } else if (!loginResponse) {
-      return <Alert messages={loginResponse.error} />;
     }
   }
 
@@ -70,7 +75,7 @@ function JoblyApp() {
 
   return (
     <div className="JoblyApp">
-      <RoutesList currUser={currUser} handleLogin={handleLogin} />
+      <RoutesList currUser={currUser} handleLogin={handleLogin} errors={errors} />
     </div>
   );
 };
