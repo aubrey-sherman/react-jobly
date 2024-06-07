@@ -57,6 +57,8 @@ function JoblyApp() {
   /** */
   async function handleSignup(formData) {
     console.log("handleSignup: formData:", formData);
+
+
   }
 
   useEffect(function fetchUserDataOnLogin() {
