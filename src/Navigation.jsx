@@ -15,7 +15,7 @@ import { NavLink } from "react-router-dom";
  * App -> Navigation
  */
 
-function Navigation({ currUser }) {
+function Navigation({ currUser, handleLogout }) {
   console.log("* Navigation");
 
   return (
@@ -75,7 +75,8 @@ function Navigation({ currUser }) {
 
           <li className="nav-item px-2">
             <NavLink
-              to={'/logout'}
+              to={'/'}
+              onClick={handleLogout}
             >
               Logout {currUser.username}
             </NavLink>
