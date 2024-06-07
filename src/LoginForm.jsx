@@ -4,7 +4,7 @@ import Alert from "./Alert.jsx";
 
 /** Login form for Jobly
  *
- * Props: handleLogin function
+ * Props: handleLogin function, errors like ["message1", ...]
  * State: formData
  *
  *
@@ -26,7 +26,7 @@ function LoginForm({ handleLogin, errors }) {
     });
   }
 
-  /** Sends formData to JoblyApp on form submission*/
+  /** Sends formData to JoblyApp on form submission */
   function handleSubmit(evt) {
     evt.preventDefault();
     handleLogin(formData);
@@ -34,8 +34,9 @@ function LoginForm({ handleLogin, errors }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="row justify-content-center">
+      <div className="justify-content-center">
         <div className="col-8">
+          Username
           <input
             type="text"
             name="username"
@@ -43,6 +44,7 @@ function LoginForm({ handleLogin, errors }) {
             placeholder="username"
             onChange={handleChange}
           />
+          Password
           <input
             type="password"
             name="password"
@@ -55,7 +57,7 @@ function LoginForm({ handleLogin, errors }) {
           <button type="submit" className="btn btn-lg btn-primary">Login</button>
         </div>
       </div>
-      {errors.length > 0 && <Alert messages={errors}/>}
+      {errors.length > 0 && <Alert messageStyle="alert alert-danger" messages={errors} />}
     </form>
   );
 }
