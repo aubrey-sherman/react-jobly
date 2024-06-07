@@ -54,13 +54,6 @@ function JoblyApp() {
     }
   }
 
-  /** */
-  async function handleSignup(formData) {
-    console.log("handleSignup: formData:", formData);
-
-
-  }
-
   useEffect(function fetchUserDataOnLogin() {
     async function fetchUserData() {
       if (currUser !== null) {
@@ -84,16 +77,32 @@ function JoblyApp() {
     setToken(currToken => "");
     setErrors(currErrors => []);
   }
-  //TODO: make handleSignup and handleLogout functions
+
+  async function handleSignup(formData) {
+    let signupResponse;
+    try {
+      signupResponse = await JoblyApi.registerUser(formData);
+    } catch (errs) {
+      console.log("Errors=", errs);
+      console.log("signupResponse", signupResponse);
+      setErrors(errs);
+    }
+
+    if (signupResponse) {
+      await handleLogin(
+        { username: formData.username, password: formData.password });
+    }
+  }
 
 
   return (
     <div className="JoblyApp">
-      <userContext.Provider value={{user: currUser}}>
+      <userContext.Provider value={{ user: currUser }}>
         <RoutesList
           currUser={currUser}
           handleLogin={handleLogin}
           handleLogout={handleLogout}
+          handleSignup={handleSignup}
           errors={errors}
         />
       </userContext.Provider>
