@@ -11,7 +11,7 @@ import { v4 as uuid } from "uuid";
 function Alert({ messages, messageStyle }) {
   return (
     <div className={messageStyle}>
-      {messages.map(message => <p key={uuid()}>{message}</p>)}
+      {messages.map(message => <p key={message}>{message}</p>)}
     </div>
   );
 }
