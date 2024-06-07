@@ -19,12 +19,14 @@ import Logout from "./Logout.jsx";
  *                      email,
  *                      applications: [jobID, ...]
  *                    }
+ *        handleLogin function
+ *
  * State: None
  *
- * App -> RoutesList -> {Navigation, Homepage, CompanyList, CompanyDetail, JobList}
+ * JoblyApp -> RoutesList -> {Navigation, LoginForm, SignupForm, Logout, Homepage, CompanyList, CompanyDetail, JobList}
  */
 
-function RoutesList({ currUser }) {
+function RoutesList({ currUser, handleLogin }) {
   console.log("* RoutesList");
   return (
     <div>
@@ -34,7 +36,7 @@ function RoutesList({ currUser }) {
           <Route path="/" element={<Homepage />} />
           {currUser === null &&
             <>
-              <Route path="/login" element={<LoginForm />} />
+              <Route path="/login" element={<LoginForm handleLogin={handleLogin}/>} />
               <Route path="/signup" element={<SignupForm />} />
             </>
           }
