@@ -55,7 +55,7 @@ class JoblyApi {
   /** Search for companies with search term query */
 
   static async findCompanies(searchParam) {
-    const data = {nameLike: searchParam};
+    const data = { nameLike: searchParam };
     let res = await this.request(`companies/`, data);
     return res.companies;
   }
@@ -78,7 +78,7 @@ class JoblyApi {
   /** Search for jobs with search term query */
 
   static async findJobs(searchParam) {
-    const data = {title: searchParam};
+    const data = { title: searchParam };
     let res = await this.request(`jobs/`, data);
     return res.jobs;
   }
@@ -96,8 +96,28 @@ class JoblyApi {
     return res.token; // TODO: verify correct return
   }
 
+  /** Logs in a user with a valid username and password.
+   *
+   *  For authenticated username/password, returns a token.
+   *
+   *  For failed authentication, returns error object =>
+   *      { error: message, status}
+   */
 
-  //TODO: Login method
+  static async logInUser({ username, password }) {
+    let res = await this.request('/token', {
+      username,
+      password
+    },
+      "POST");
+
+    if (res.token) {
+      this.token = res.token;
+      return this.token;
+    } else if (res.error) {
+      return res.error;
+    }
+  }
 
   //TODO: updateProfile method
 }
