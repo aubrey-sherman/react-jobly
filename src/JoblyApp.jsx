@@ -28,7 +28,10 @@ import userContext from './userContext.js';
 
 function JoblyApp() {
   const [currUser, setCurrUser] = useState(null);
-  const [token, setToken] = useState("");
+
+  const savedToken = localStorage.getItem('token');
+  JoblyApi.token = savedToken || '';
+  const [token, setToken] = useState(savedToken || '');
 
   console.log("* JoblyApp", { currUser, token });
 
@@ -37,15 +40,15 @@ function JoblyApp() {
    * Updates state with token.
    * If login fails to authenticate, renders error message.
   */
-
   async function handleLogin({ username, password }) {
     console.log("handleLogin: formData", username, password);
 
-    const apiToken = await JoblyApi.logInUser({username, password});
+    const apiToken = await JoblyApi.logInUser({ username, password });
 
     if (apiToken) {
       setToken(apiToken);
-      <Navigate to={"/"} />;
+      localStorage.setItem('token', apiToken);
+      < Navigate to={"/"} />;
     }
   }
 
@@ -75,6 +78,7 @@ function JoblyApp() {
   function handleLogout() {
     setCurrUser(null);
     setToken("");
+    localStorage.clear();
     setErrors([]);
   }
 
@@ -82,16 +86,17 @@ function JoblyApp() {
    *
    * Calls login function upon successful signup
    */
-  async function handleSignup({username, password, firstName, lastName, email}) {
+  async function handleSignup({ username, password, firstName, lastName, email }) {
     const userData = {
       username,
       password,
       firstName,
       lastName,
       email
-    }
+    };
     const apiToken = await JoblyApi.registerUser(userData);
     setToken(apiToken);
+    localStorage.setItem('token', apiToken);
 
     if (apiToken) {
       setToken(apiToken);
