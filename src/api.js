@@ -81,7 +81,8 @@ class JoblyApi {
     return res.jobs;
   }
 
-  //FIXME: docstring
+  /**  Register a user with data from sign up form. Returns a token on success. */
+
   static async registerUser({ username, password, firstName, lastName, email }) {
     let res = await this.request('auth/register', {
       username,
