@@ -104,6 +104,9 @@ function JoblyApp() {
     }
   }
 
+  if (token && !currUser) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <div className="JoblyApp">
