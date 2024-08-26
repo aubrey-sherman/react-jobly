@@ -1,6 +1,8 @@
 ## Jobly
 
-Jobly is a React front-end app for job searching. Users can
+Jobly is a React front-end app for job searching.
+
+Users can:
 * sign up
 * log in/out
 * edit their profile page
@@ -8,9 +10,7 @@ Jobly is a React front-end app for job searching. Users can
 * search for specific companies and jobs
 
 
-It connects with an Express back-end API that handles user authorization and serving information from the database.
-
-Repo for the back-end can be found [here](https://github.com/aubrey-sherman/jobly-be).
+It connects with an Express back-end API that handles user authorization and serving information from the database. Repo for the back-end can be found [here](https://github.com/aubrey-sherman/jobly-be).
 
 ### Installation
 
