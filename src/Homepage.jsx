@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import userContext from "./userContext.js";
+import "./Homepage.css";
 
 /** Homepage for Jobly
  *
@@ -14,16 +15,18 @@ function Homepage() {
   const { user } = useContext(userContext);
   console.log("* Homepage");
   return (
-    <div>
-      <h1>Jobly!</h1>
-      <h3>All the jobs in one convenient place</h3>
-      {user && <h2>Welcome back, {user.firstName}!</h2>}
-      {!user &&
-        <>
-          <Link to={'/login'} className="btn btn-primary fw-bold me-3">Login</Link>
-          <Link to={'/signup'} className="btn btn-primary fw-bold me-3">Sign Up</Link>
-        </>
-      }
+    <div class="homepage">
+      <div class="container text-center">
+        <h1>Jobly</h1>
+        <h3>All the jobs in one convenient place</h3>
+        {user && <h2>Welcome back, {user.firstName}!</h2>}
+        {!user &&
+          <>
+            <Link to={'/login'} className="btn btn-primary fw-bold me-3">Login</Link>
+            <Link to={'/signup'} className="btn btn-primary fw-bold me-3">Sign Up</Link>
+          </>
+        }
+      </div>
     </div>
   );
 }
