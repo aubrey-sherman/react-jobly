@@ -20,7 +20,7 @@ function SignupForm({ handleSignup }) {
   };
   const [formData, setFormData] = useState(defaultFormData);
   const [errors, setErrors] = useState([]);
-  console.log("SignupForm");
+  console.log("* SignupForm");
 
   /** Update formData as user types into form fields */
   function handleChange(evt) {
@@ -36,6 +36,7 @@ function SignupForm({ handleSignup }) {
   /** Sends formData to JoblyApp on form submission */
   async function handleSubmit(evt) {
     evt.preventDefault();
+
     try {
       await handleSignup(formData);
     }
