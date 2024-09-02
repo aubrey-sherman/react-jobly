@@ -10,7 +10,7 @@ import "./CompanyCard.css";
  */
 
 function CompanyCard({ company }) {
-  console.log("* CompanyCard", company);
+  console.log("* CompanyCard");
 
   return (
     <NavLink to={`/companies/${company.handle}`}>

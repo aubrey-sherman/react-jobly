@@ -17,7 +17,7 @@ import { useState, useEffect } from "react";
 function JobList() {
   const [jobs, setJobs] = useState({ data: null, isLoading: true });
   const [searchParam, setSearchParam] = useState("");
-  console.log("* JobList", { jobs, searchParam });
+  console.log("* JobList");
 
   useEffect(function fetchJobsOnSearch() {
     async function fetchJobs() {

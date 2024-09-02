@@ -16,7 +16,7 @@ import { useState, useEffect } from "react";
 function CompanyList() {
   const [companies, setCompanies] = useState({ data: null, isLoading: true });
   const [searchParam, setSearchParam] = useState("");
-  console.log("* CompanyList", { companies, searchParam });
+  console.log("* CompanyList");
 
   useEffect(function fetchCompaniesOnSearch() {
     async function fetchCompanies() {

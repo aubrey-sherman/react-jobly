@@ -33,7 +33,7 @@ function JoblyApp() {
   JoblyApi.token = savedToken || '';
   const [token, setToken] = useState(savedToken || '');
 
-  console.log("* JoblyApp", { currUser, token });
+  console.log("* JoblyApp");
 
   /** Logs in a user with a valid username/password.
    *
@@ -41,7 +41,6 @@ function JoblyApp() {
    * If login fails to authenticate, renders error message.
   */
   async function handleLogin({ username, password }) {
-    console.log("handleLogin: formData", username, password);
 
     const apiToken = await JoblyApi.logInUser({ username, password });
 

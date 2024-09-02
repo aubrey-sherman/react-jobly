@@ -8,7 +8,7 @@
  */
 
 function JobCard({ job }) {
-  console.log("* JobCard", job);
+  console.log("* JobCard");
 
   return (
     <div>

@@ -10,7 +10,7 @@ import { useState } from "react";
 
 function SearchForm({ handleSearch }) {
   const [formData, setFormData] = useState({searchParam: ""});
-  console.log("* SearchForm", formData);
+  console.log("* SearchForm");
 
   /** Update formData as user types into search bar */
   function handleChange(evt) {

@@ -14,7 +14,7 @@ import Alert from "./Alert.jsx";
 function LoginForm({ handleLogin }) {
   const [formData, setFormData] = useState({ username: "", password: "" });
   const [errors, setErrors] = useState([]);
-  console.log("LoginForm", formData);
+  console.log("* LoginForm");
 
   /** Update formData as user types into form fields */
   function handleChange(evt) {
