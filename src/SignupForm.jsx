@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from 'react-router-dom';
 import { v4 as uuid } from "uuid";
 import Alert from "./Alert.jsx";
 
@@ -46,49 +47,81 @@ function SignupForm({ handleSignup }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="justify-content-center">
-        <div className="col-8">
-          Username
-          <input
-            type="text"
-            name="username"
-            className="form-control form-control-lg"
-            onChange={handleChange}
-          />
-          Password
-          <input
-            type="password"
-            name="password"
-            className="form-control form-control-lg"
-            onChange={handleChange}
-          />
-          First name
-          <input
-            type="text"
-            name="firstName"
-            className="form-control form-control-lg"
-            onChange={handleChange}
-          />
-          Last name
-          <input
-            type="text"
-            name="lastName"
-            className="form-control form-control-lg"
-            onChange={handleChange}
-          />
-          Email
-          <input
-            type="email"
-            name="email"
-            className="form-control form-control-lg"
-            onChange={handleChange}
-          />
-          <button type="submit" className="btn btn-lg btn-primary">Submit</button>
+    <div className="SignupForm">
+    <h2>Sign up for a Jobly account</h2>
+    <p>Already using Jobly? Log in <Link to={'/login'}> here</Link>.</p>
+      <form onSubmit={handleSubmit}>
+
+        <div className="form-group row align-items-center mb-3">
+          <label for="username-input" className="col-sm-4 col-form-label">Username</label>
+          <div className="col-sm-8">
+            <input
+              type="text"
+              name="username"
+              id="username-input"
+              className="form-control"
+              onChange={handleChange}
+            />
+          </div>
         </div>
-      </div>
-      {errors.length > 0 && <Alert messageStyle="alert alert-danger" messages={errors} />}
-    </form>
+
+        <div className="form-group row align-items-center mb-3">
+          <label for="password-input" className="col-sm-4 col-form-label">Password</label>
+          <div className="col-sm-8">
+            <input
+              type="password"
+              name="password"
+              id="password-input"
+              className="form-control"
+              onChange={handleChange}
+            />
+          </div>
+        </div>
+
+        <div className="form-group row align-items-center mb-3">
+          <label for="first-name-input" className="col-sm-4 col-form-label">First name</label>
+          <div className="col-sm-8">
+            <input
+              id="first-name-input"
+              type="text"
+              name="firstName"
+              className="form-control"
+              onChange={handleChange}
+            />
+          </div>
+        </div>
+
+        <div className="form-group row align-items-center mb-3">
+          <label for="last-name-input" className="col-sm-4 col-form-label">Last name</label>
+          <div className="col-sm-8">
+            <input
+              id="last-name-input"
+              type="text"
+              name="lastName"
+              className="form-control"
+              onChange={handleChange}
+            />
+          </div>
+        </div>
+
+        <div className="form-group row align-items-center mb-3">
+          <label for="email-input" className="col-sm-4 col-form-label">Email</label>
+          <div className="col-sm-8">
+            <input
+              id="email-input"
+              type="email"
+              name="email"
+              className="form-control"
+              onChange={handleChange}
+            />
+          </div>
+        </div>
+
+          <button type="submit" className="btn btn-primary">Submit</button>
+        {errors.length > 0 && <Alert messageStyle="alert alert-danger" messages={errors} />}
+      </form>
+
+    </div>
   );
 
 }

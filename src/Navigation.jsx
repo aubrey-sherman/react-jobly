@@ -29,11 +29,11 @@ function Navigation({ currUser, handleLogout }) {
         {currUser === null &&
           <>
             <li className="nav-item px-2">
-              <NavLink to={'/login'}>Login</NavLink>
+              <NavLink to={'/login'}>Log In</NavLink>
             </li>
 
             <li>
-              <NavLink to={'/signup'}>Signup</NavLink>
+              <NavLink to={'/signup'}>Sign Up</NavLink>
             </li>
           </>
         }
