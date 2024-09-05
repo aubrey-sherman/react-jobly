@@ -22,8 +22,8 @@ function Homepage() {
         {user && <h2>Welcome back, {user.firstName}!</h2>}
         {!user &&
           <>
-            <Link to={'/login'} className="btn btn-primary fw-bold me-3">Log In</Link>
-            <Link to={'/signup'} className="btn btn-primary fw-bold me-3">Sign Up</Link>
+            <Link to={'/login'} className="btn btn-dark fw-bold me-3">Log In</Link>
+            <Link to={'/signup'} className="btn btn-dark fw-bold me-3">Sign Up</Link>
           </>
         }
       </div>
