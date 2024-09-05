@@ -117,7 +117,7 @@ function SignupForm({ handleSignup }) {
           </div>
         </div>
 
-          <button type="submit" className="btn btn-primary">Submit</button>
+          <button type="submit" className="btn btn-dark">Submit</button>
         {errors.length > 0 && <Alert messageStyle="alert alert-danger" messages={errors} />}
       </form>
 

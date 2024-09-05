@@ -39,32 +39,42 @@ function LoginForm({ handleLogin }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="justify-content-center">
-        <div className="col-8">
-          Username
-          <input
-            type="text"
-            name="username"
-            className="form-control form-control-lg"
-            placeholder="username"
-            onChange={handleChange}
-          />
-          Password
-          <input
-            type="password"
-            name="password"
-            className="form-control form-control-lg"
-            placeholder="password"
-            onChange={handleChange}
-          />
+    <div className="LoginForm">
+      <h2>Welcome back!</h2>
+
+      <form onSubmit={handleSubmit}>
+
+        <div className="form-group row align-items-center mb-3">
+          <label for="username-input" className="col-sm-4 col-form-label">Username</label>
+          <div className="col-sm-8">
+            <input
+              type="text"
+              name="username"
+              className="form-control"
+              placeholder="username"
+              onChange={handleChange}
+            />
+          </div>
         </div>
-        <div className="col-auto">
-          <button type="submit" className="btn btn-lg btn-primary">Login</button>
+
+        <div className="form-group row align-items-center mb-3">
+          <label for="password-input" className="col-sm-4 col-form-label">Password</label>
+          <div className="col-sm-8">
+            <input
+              type="password"
+              name="password"
+              className="form-control"
+              placeholder="password"
+              onChange={handleChange}
+            />
+          </div>
         </div>
-      </div>
-      {errors.length > 0 && <Alert messageStyle="alert alert-danger" messages={errors} />}
-    </form>
+
+          <button type="submit" className="btn btn-dark">Login</button>
+        {errors.length > 0 && <Alert messageStyle="alert alert-danger" messages={errors} />}
+      </form>
+
+    </div>
   );
 }
 
